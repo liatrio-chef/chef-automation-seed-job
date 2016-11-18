@@ -22,15 +22,9 @@ cookbooks.each {
         }
         steps {
             shell(readFileFromWorkspace("unit_test.sh"))
-            downstreamParameterized {
-                trigger(testKitchenJobName) {
-                    block {
-                        buildStepFailure('FAILURE')
-                        failure('FAILURE')
-                        unstable('UNSTABLE')
-                    }
-                }
-            }
+        }
+        publishers {
+            downstream(testKitchenJobName, 'SUCCESS')
         }
     }
 
@@ -44,16 +38,10 @@ cookbooks.each {
             }
         }
         steps {
-            shell("kitchen test")
-            downstreamParameterized {
-                trigger(knifeUploadJobName) {
-                    block {
-                        buildStepFailure('FAILURE')
-                        failure('FAILURE')
-                        unstable('UNSTABLE')
-                    }
-                }
-            }
+            shell("kitchen test -d always --color")
+        }
+        publishers {
+            downstream(knifeUploadJobName, 'SUCCESS')
         }
     }
 
