@@ -9,6 +9,7 @@ cookbooks.each {
     def knifeUploadJobName = "chef-cookbook-" + cookBookName + "-3-knife-upload"
 
     job(unitTestJobName){
+        description("This job was created with automation.  Manual edits to this job are discouraged.")
         scm {
             git{
                 branch("master")
@@ -25,10 +26,31 @@ cookbooks.each {
         }
         publishers {
             downstream(testKitchenJobName, 'SUCCESS')
+            slackNotifier {
+                notifyFailure(true)
+                notifySuccess(true)
+                notifyAborted(false)
+                notifyNotBuilt(false)
+                notifyUnstable(false)
+                notifyBackToNormal(false)
+                notifyRepeatedFailure(false)
+                startNotification(false)
+                includeTestSummary(true)
+                includeCustomMessage(false)
+                customMessage(null)
+                buildServerUrl(null)
+                sendAs(null)
+                commitInfoChoice('NONE')
+                teamDomain(null)
+                authToken(null)
+                room('jenkins-build')
+            }
+            mailer('drew@liatrio.com', true, true)
         }
     }
 
     job(testKitchenJobName){
+        description("This job was created with automation.  Manual edits to this job are discouraged.")
         scm {
             git{
                 branch("master")
@@ -42,10 +64,31 @@ cookbooks.each {
         }
         publishers {
             downstream(knifeUploadJobName, 'SUCCESS')
+            slackNotifier {
+                notifyFailure(true)
+                notifySuccess(true)
+                notifyAborted(false)
+                notifyNotBuilt(false)
+                notifyUnstable(false)
+                notifyBackToNormal(false)
+                notifyRepeatedFailure(false)
+                startNotification(false)
+                includeTestSummary(true)
+                includeCustomMessage(false)
+                customMessage(null)
+                buildServerUrl(null)
+                sendAs(null)
+                commitInfoChoice('NONE')
+                teamDomain(null)
+                authToken(null)
+                room('jenkins-build')
+            }
+            mailer('drew@liatrio.com', true, true)
         }
     }
 
     job(knifeUploadJobName){
+        description("This job was created with automation.  Manual edits to this job are discouraged.")
         scm {
             git{
                 branch("master")
@@ -56,6 +99,28 @@ cookbooks.each {
         }
         steps {
             shell("#knife cookbook upload " + cookBookName)
+        }
+        publishers {
+            slackNotifier {
+                notifyFailure(true)
+                notifySuccess(true)
+                notifyAborted(false)
+                notifyNotBuilt(false)
+                notifyUnstable(false)
+                notifyBackToNormal(false)
+                notifyRepeatedFailure(false)
+                startNotification(false)
+                includeTestSummary(true)
+                includeCustomMessage(false)
+                customMessage(null)
+                buildServerUrl(null)
+                sendAs(null)
+                commitInfoChoice('NONE')
+                teamDomain(null)
+                authToken(null)
+                room('jenkins-build')
+            }
+            mailer('drew@liatrio.com', true, true)
         }
     }
 
