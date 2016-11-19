@@ -4,7 +4,7 @@ rubocop --version
 foodcritic --version
 
 echo "Starting chefstyle (rubocop): "
-rubocop -r chefstyle --color
+rubocop --color
 
 echo "Starting foodcritic: "
 foodcritic .
