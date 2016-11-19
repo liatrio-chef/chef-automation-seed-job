@@ -4,6 +4,7 @@ cookbooks.each {
     cookBookName->
 
     def repoUrl = "https://github.com/liatrio-chef/" + cookBookName + ".git"
+    def projectUrl = "https://github.com/liatrio-chef/" + cookBookName
     def unitTestJobName = "chef-cookbook-" + cookBookName + "-1-unit-test"
     def testKitchenJobName = "chef-cookbook-" + cookBookName + "-2-test-kitchen"
     def knifeUploadJobName = "chef-cookbook-" + cookBookName + "-3-knife-upload"
@@ -12,6 +13,9 @@ cookbooks.each {
         description("This job was created with automation.  Manual edits to this job are discouraged.")
         wrappers {
             colorizeOutput()
+        }
+        properties {
+            githubProjectUrl(projectUrl)
         }
         scm {
             git{
@@ -23,6 +27,7 @@ cookbooks.each {
         }
         triggers {
             scm('H/2 * * * *')
+            githubPush()
         }
         steps {
             shell(readFileFromWorkspace("unit_test.sh"))
@@ -49,6 +54,7 @@ cookbooks.each {
                 room('jenkins-build')
             }
             mailer('drew@liatrio.com', true, true)
+            githubCommitNotifier()
         }
     }
 
@@ -56,6 +62,9 @@ cookbooks.each {
         description("This job was created with automation.  Manual edits to this job are discouraged.")
         wrappers {
             colorizeOutput()
+        }
+        properties {
+            githubProjectUrl(projectUrl)
         }
         scm {
             git{
@@ -90,6 +99,7 @@ cookbooks.each {
                 room('jenkins-build')
             }
             mailer('drew@liatrio.com', true, true)
+            githubCommitNotifier()
         }
     }
 
@@ -97,6 +107,9 @@ cookbooks.each {
         description("This job was created with automation.  Manual edits to this job are discouraged.")
         wrappers {
             colorizeOutput()
+        }
+        properties {
+            githubProjectUrl(projectUrl)
         }
         scm {
             git{
@@ -130,6 +143,7 @@ cookbooks.each {
                 room('jenkins-build')
             }
             mailer('drew@liatrio.com', true, true)
+            githubCommitNotifier()
         }
     }
 
