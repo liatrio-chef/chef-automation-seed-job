@@ -4,10 +4,10 @@ rubocop --version
 foodcritic --version
 
 echo "Starting chefstyle (rubocop): "
-#rubocop -r chefstyle
+rubocop -r chefstyle --color
 
 echo "Starting foodcritic: "
 foodcritic .
 
 echo "Starting ChefSpec: "
-chef exec rspec
+chef exec rspec --color
