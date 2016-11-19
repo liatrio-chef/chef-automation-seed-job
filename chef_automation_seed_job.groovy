@@ -10,6 +10,9 @@ cookbooks.each {
 
     job(unitTestJobName){
         description("This job was created with automation.  Manual edits to this job are discouraged.")
+        wrappers {
+            colorizeOutput()
+        }
         scm {
             git{
                 branch("master")
@@ -51,6 +54,9 @@ cookbooks.each {
 
     job(testKitchenJobName){
         description("This job was created with automation.  Manual edits to this job are discouraged.")
+        wrappers {
+            colorizeOutput()
+        }
         scm {
             git{
                 branch("master")
@@ -89,6 +95,9 @@ cookbooks.each {
 
     job(knifeUploadJobName){
         description("This job was created with automation.  Manual edits to this job are discouraged.")
+        wrappers {
+            colorizeOutput()
+        }
         scm {
             git{
                 branch("master")
