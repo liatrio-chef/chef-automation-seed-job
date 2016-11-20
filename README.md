@@ -24,4 +24,3 @@ Contributing
 License and Authors
 -------------------
 Authors: Drew Holt <drew@liatrio.com>
-test
