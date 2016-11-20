@@ -23,14 +23,14 @@ cookbooks.each {
         }
         scm {
             git{
-                branch("master")
+                // branch("master")
                 remote {
                     url(repoUrl)
                 }
             }
         }
         triggers {
-            scm('H/2 * * * *')
+            // scm('H/2 * * * *') // use github hook to triiger
             githubPush()
         }
         steps {
