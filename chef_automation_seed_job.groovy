@@ -72,7 +72,7 @@ cookbooks.each {
         }
         scm {
             git{
-                branch("master")
+                // branch("master")
                 remote {
                     url(repoUrl)
                 }
@@ -117,7 +117,7 @@ cookbooks.each {
         }
         scm {
             git{
-                branch("master")
+                // branch("master")
                 remote {
                     url(repoUrl)
                 }
