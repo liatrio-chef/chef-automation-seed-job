@@ -112,7 +112,7 @@ cookbooks.each {
         wrappers {
             colorizeOutput()
             credentialsBinding {
-                file('chef-uploader', 'chef-uploader.pem')
+                file('CHEFUPLOADER', 'bf42b6f2-54ab-4172-a24c-48b2bec6737f')
             }
         }
         properties {
@@ -127,18 +127,36 @@ cookbooks.each {
             }
         }
         steps {
-            shell("""knife spork check ${cookBookName}
+            shell('''
+cat << EOF > knife.rb
+current_dir = File.dirname(__FILE__)
+log_level         :info
+log_location      STDOUT
+node_name         "cloudservices"
+client_key        "$CHEFUPLOADER"
+chef_server_url   "https://api.chef.io/organizations/liatrio"
+cookbook_path     ["../"]
+#ssl_verify_mode  :verify_none
+EOF
 
-if [ `git log --pretty=oneline | head -1 | grep ''#major'` ]
+''' + """
+knife spork check ${cookBookName}
+
+""" + '''
+if [ `git log --pretty=oneline | head -1 | grep '#major'` ]
 then
+''' + """
   knife spork bump ${cookBookName}
-
+""" + '''
 elif [ `git log --pretty=oneline | head -1 | grep '#minor'` ]
 then
+''' + """
   knife spork bump ${cookBookName}
 
+""" + '''
 elif [ `git log --pretty=oneline | head -1 | grep '#patch'` ]
 then
+''' + """
   knife spork bump ${cookBookName}
 
 else
