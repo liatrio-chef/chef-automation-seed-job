@@ -124,7 +124,27 @@ cookbooks.each {
             }
         }
         steps {
-            shell("#knife cookbook upload " + cookBookName)
+            shell("""knife spork check ${cookBookName}-liatrio
+
+if [ `git log --pretty=oneline | head -1 | grep ''#major'` ]
+then
+  knife spork bump ${cookBookName}-liatrio major
+
+elif [ `git log --pretty=oneline | head -1 | grep '#minor'` ]
+then
+  knife spork bump ${cookBookName}-liatrio inor
+
+elif [ `git log --pretty=oneline | head -1 | grep '#patch'` ]
+then
+  knife spork bump ${cookBookName}-liatrio patch
+
+else
+  knife spork bump ${cookBookName}-liatrio patch
+fi
+
+knife spork upload ${cookBookName}-liatrio
+
+#knife spork promote sandbox ${cookBookName}-liatrio --remote""")
         }
         publishers {
             slackNotifier {
