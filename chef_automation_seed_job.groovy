@@ -111,6 +111,9 @@ cookbooks.each {
         description("This job was created with automation.  Manual edits to this job are discouraged.")
         wrappers {
             colorizeOutput()
+            credentialsBinding {
+                file('chef-uploader', 'chef-uploader.pem')
+            }
         }
         properties {
             githubProjectUrl(projectUrl)
