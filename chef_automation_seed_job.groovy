@@ -108,6 +108,7 @@ cookbooks.each {
     }
 
     job(knifeUploadJobName){
+        disabled()
         description("This job was created with automation.  Manual edits to this job are discouraged.")
         wrappers {
             colorizeOutput()
@@ -142,21 +143,16 @@ EOF
 ''' + """
 knife spork check ${cookBookName}
 
-""" + '''
 if [ `git log --pretty=oneline | head -1 | grep '#major'` ]
 then
-''' + """
-  knife spork bump ${cookBookName}
-""" + '''
-elif [ `git log --pretty=oneline | head -1 | grep '#minor'` ]
-then
-''' + """
   knife spork bump ${cookBookName}
 
-""" + '''
+elif [ `git log --pretty=oneline | head -1 | grep '#minor'` ]
+then
+  knife spork bump ${cookBookName}
+
 elif [ `git log --pretty=oneline | head -1 | grep '#patch'` ]
 then
-''' + """
   knife spork bump ${cookBookName}
 
 else
