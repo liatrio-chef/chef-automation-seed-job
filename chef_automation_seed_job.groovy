@@ -2,7 +2,7 @@
 // job("chef/" + unitTestJobName)
 // add views via dsl and not config xml
 
-def cookbooks = ["jenkins-liatrio","nexus-liatrio","archiva-liatrio","apache2-liatrio","hygieia-liatrio","tomcat-liatrio","selenium-liatrio","sonarqube-liatrio"]
+def cookbooks = ["jenkins-as-code","jenkins-liatrio","nexus-liatrio","archiva-liatrio","apache2-liatrio","hygieia-liatrio","tomcat-liatrio","selenium-liatrio","sonarqube-liatrio"]
 
 cookbooks.each {
     cookBookName->
