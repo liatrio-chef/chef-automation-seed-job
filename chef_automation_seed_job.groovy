@@ -79,7 +79,7 @@ cookbooks.each {
             }
         }
         steps {
-            shell("kitchen test -d always --color")
+            shell("berks update; kitchen test -d always --color")
         }
         publishers {
             downstream(knifeUploadJobName, 'SUCCESS')
@@ -141,6 +141,7 @@ cookbook_path     ["../"]
 EOF
 
 ''' + """
+
 knife spork check ${cookBookName}
 
 if [ `git log --pretty=oneline | head -1 | grep '#major'` ]
