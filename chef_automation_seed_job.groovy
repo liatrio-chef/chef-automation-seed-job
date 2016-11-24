@@ -79,7 +79,7 @@ cookbooks.each {
             }
         }
         steps {
-            shell("berks update; kitchen test -d always --color")
+            shell("if [ ! -f Berksfile.lock ]; then berks install; else berks update; fi; kitchen test -d always --color")
         }
         publishers {
             downstream(knifeUploadJobName, 'SUCCESS')
