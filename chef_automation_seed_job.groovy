@@ -2,7 +2,7 @@
 // job("chef/" + unitTestJobName)
 // add views via dsl and not config xml
 
-def cookbooks = ["jenkins-as-code","jenkins-liatrio","nexus-liatrio","archiva-liatrio","apache2-liatrio","hygieia-liatrio","tomcat-liatrio","selenium-liatrio","sonarqube-liatrio"]
+def cookbooks = ["jenkins-as-code","jenkins-liatrio","nexus-liatrio","archiva-liatrio","apache2-liatrio","hygieia-liatrio","tomcat-liatrio","selenium-liatrio","sonarqube-liatrio","hygieia-dev-unbaked","hygieia-petclinic-demo-unbaked"]
 
 cookbooks.each {
     cookBookName->
@@ -38,10 +38,6 @@ cookbooks.each {
         }
         publishers {
             downstream(testKitchenJobName, 'SUCCESS')
-            if ( cookBookName == "jenkins-liatrio" )
-            {
-                downstream("chef-cookbook-jenkins-as-code-1-unit-test", 'SUCCESS')
-            }
             slackNotifier {
                 notifyFailure(true)
                 notifySuccess(true)
@@ -87,6 +83,12 @@ cookbooks.each {
         }
         publishers {
             downstream(knifeUploadJobName, 'SUCCESS')
+            if ( cookBookName == "jenkins-liatrio" )
+            {
+                downstream("chef-cookbook-jenkins-as-code-1-unit-test", 'SUCCESS')
+                downstream("chef-cookbook-hygieia-dev-unbaked-1-unit-test", 'SUCCESS')
+                downstream("chef-cookbook-hygieia-petclinic-demo-unbaked-1-unit-test", 'SUCCESS')
+            }
             slackNotifier {
                 notifyFailure(true)
                 notifySuccess(true)
