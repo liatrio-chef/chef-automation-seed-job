@@ -38,6 +38,10 @@ cookbooks.each {
         }
         publishers {
             downstream(testKitchenJobName, 'SUCCESS')
+            if ( cookBookName == "jenkins-liatrio" )
+            {
+                downstream("chef-cookbook-jenkins-as-code-1-unit-test", 'SUCCESS')
+            }
             slackNotifier {
                 notifyFailure(true)
                 notifySuccess(true)
