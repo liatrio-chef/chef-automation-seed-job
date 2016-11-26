@@ -83,7 +83,7 @@ cookbooks.each {
         }
         publishers {
             downstream(knifeUploadJobName, 'SUCCESS')
-            if ( cookBookName == "jenkins-liatrio" )
+            if ( cookBookName == "hygieia-liatrio" )
             {
                 downstream("chef-cookbook-jenkins-as-code-1-unit-test", 'SUCCESS')
                 downstream("chef-cookbook-hygieia-dev-unbaked-1-unit-test", 'SUCCESS')
