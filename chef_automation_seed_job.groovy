@@ -97,7 +97,7 @@ cookbooks.each {
                 notifyUnstable(false)
                 notifyBackToNormal(true)
                 notifyRepeatedFailure(false)
-                startNotification(false)
+                startNotification(true)
                 includeTestSummary(true)
                 includeCustomMessage(false)
                 customMessage(null)
