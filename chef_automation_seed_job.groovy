@@ -83,9 +83,14 @@ cookbooks.each {
         }
         publishers {
             downstream(knifeUploadJobName, 'SUCCESS')
-            if ( cookBookName == "hygieia-liatrio" )
+            if ( cookBookName == "jenkins-liatrio" )
             {
                 downstream("chef-cookbook-jenkins-as-code-1-unit-test", 'SUCCESS')
+                downstream("chef-cookbook-hygieia-dev-unbaked-1-unit-test", 'SUCCESS')
+                downstream("chef-cookbook-hygieia-petclinic-demo-unbaked-1-unit-test", 'SUCCESS')
+            }
+          else if ( cookBookName == "hygieia-liatrio" )
+            {
                 downstream("chef-cookbook-hygieia-dev-unbaked-1-unit-test", 'SUCCESS')
                 downstream("chef-cookbook-hygieia-petclinic-demo-unbaked-1-unit-test", 'SUCCESS')
             }
