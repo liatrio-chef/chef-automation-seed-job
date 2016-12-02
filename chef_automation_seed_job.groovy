@@ -119,7 +119,7 @@ cookbooks.each {
     }
 
     job(knifeUploadJobName){
-        disabled()
+        //disabled()
         description("This job was created with automation.  Manual edits to this job are discouraged.")
         wrappers {
             colorizeOutput()
