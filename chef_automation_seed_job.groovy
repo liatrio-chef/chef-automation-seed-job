@@ -147,7 +147,7 @@ log_location      STDOUT
 node_name         "cloudservices"
 client_key        "$CHEFUPLOADER"
 chef_server_url   "https://api.chef.io/organizations/liatrio"
-cookbook_path     ["../"]
+cookbook_path     [".."]
 #ssl_verify_mode  :verify_none
 EOF
 
