@@ -153,7 +153,7 @@ EOF
 
 ''' + """
 
-knife spork check ${cookBookName}
+# knife spork check ${cookBookName} # don't check because it prompts bump
 
 if [ `git log --pretty=oneline | head -1 | grep '#major'` ]
 then
