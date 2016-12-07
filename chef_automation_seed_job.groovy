@@ -1,4 +1,4 @@
-// folder('chef')
+folder('chef')
 // job("chef/" + unitTestJobName)
 // add views via dsl and not config xml
 
@@ -13,7 +13,7 @@ cookbooks.each {
     def testKitchenJobName = "chef-cookbook-" + cookBookName + "-2-test-kitchen"
     def knifeUploadJobName = "chef-cookbook-" + cookBookName + "-3-knife-upload"
 
-    job(unitTestJobName){
+    job("chef/" + unitTestJobName){
         description("This job was created with automation.  Manual edits to this job are discouraged.")
         wrappers {
             colorizeOutput()
@@ -62,7 +62,7 @@ cookbooks.each {
         }
     }
 
-    job(testKitchenJobName){
+    job("chef/" + testKitchenJobName){
         description("This job was created with automation.  Manual edits to this job are discouraged.")
         wrappers {
             colorizeOutput()
@@ -118,7 +118,7 @@ cookbooks.each {
         }
     }
 
-    job(knifeUploadJobName){
+    job("chef/" + knifeUploadJobName){
         //disabled()
         description("This job was created with automation.  Manual edits to this job are discouraged.")
         wrappers {
