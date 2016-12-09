@@ -57,8 +57,8 @@ cookbooks.each {
                 authToken(null)
                 room('jenkins-build')
             }
-            mailer('drew@liatrio.com', true, true)
-            githubCommitNotifier()
+            //mailer('drew@liatrio.com', true, true)
+            //githubCommitNotifier()
         }
     }
 
@@ -113,8 +113,8 @@ cookbooks.each {
                 authToken(null)
                 room('jenkins-build')
             }
-            mailer('drew@liatrio.com', true, true)
-            githubCommitNotifier()
+            //mailer('drew@liatrio.com', true, true)
+            //githubCommitNotifier()
         }
     }
 
@@ -195,8 +195,8 @@ knife spork upload ${cookBookName}
                 authToken(null)
                 room('jenkins-build')
             }
-            mailer('drew@liatrio.com', true, true)
-            githubCommitNotifier()
+            //mailer('drew@liatrio.com', true, true)
+            //githubCommitNotifier()
         }
     }
 
