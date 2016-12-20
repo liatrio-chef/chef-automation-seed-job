@@ -31,6 +31,7 @@ cookbooks.each {
         }
         triggers {
             // scm('H/2 * * * *') // use github hook to triiger
+            cron('@weekly')
             githubPush()
         }
         steps {
@@ -57,8 +58,8 @@ cookbooks.each {
                 authToken(null)
                 room('jenkins-build')
             }
-            //mailer('drew@liatrio.com', true, true)
-            //githubCommitNotifier()
+            mailer('drew@liatrio.com', true, false)
+            githubCommitNotifier()
         }
     }
 
@@ -113,8 +114,8 @@ cookbooks.each {
                 authToken(null)
                 room('jenkins-build')
             }
-            //mailer('drew@liatrio.com', true, true)
-            //githubCommitNotifier()
+            mailer('drew@liatrio.com', true, false)
+            githubCommitNotifier()
         }
     }
 
@@ -195,8 +196,8 @@ knife spork upload ${cookBookName}
                 authToken(null)
                 room('jenkins-build')
             }
-            //mailer('drew@liatrio.com', true, true)
-            //githubCommitNotifier()
+            mailer('drew@liatrio.com', true, false)
+            githubCommitNotifier()
         }
     }
 
