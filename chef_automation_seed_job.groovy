@@ -38,6 +38,9 @@ cookbooks.each {
             shell(readFileFromWorkspace("unit_test.sh"))
         }
         publishers {
+            publishBuild {
+              discardOldBuilds(-1, 15)
+            }
             downstream(testKitchenJobName, 'SUCCESS')
             slackNotifier {
                 notifyFailure(true)
@@ -94,6 +97,9 @@ cookbooks.each {
             {
                 downstream("chef-cookbook-hygieia-dev-unbaked-1-unit-test", 'SUCCESS')
                 downstream("chef-cookbook-hygieia-petclinic-demo-unbaked-1-unit-test", 'SUCCESS')
+            }
+            publishBuild {
+                discardOldBuilds(-1, 15)
             }
             slackNotifier {
                 notifyFailure(true)
@@ -177,6 +183,9 @@ knife spork upload ${cookBookName}
 #knife spork promote sandbox ${cookBookName} --remote""")
         }
         publishers {
+            publishBuild {
+                discardOldBuilds(-1, 15)
+            }
             slackNotifier {
                 notifyFailure(true)
                 notifySuccess(true)
