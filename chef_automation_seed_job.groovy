@@ -15,6 +15,7 @@ cookbooks.each {
 
     job("chef/" + unitTestJobName){
         description("This job was created with automation.  Manual edits to this job are discouraged.")
+        logRotator(-1, 10, -1, 3)
         wrappers {
             colorizeOutput()
         }
@@ -38,9 +39,6 @@ cookbooks.each {
             shell(readFileFromWorkspace("unit_test.sh"))
         }
         publishers {
-            publishBuild {
-              discardOldBuilds(-1, 15)
-            }
             downstream(testKitchenJobName, 'SUCCESS')
             slackNotifier {
                 notifyFailure(true)
@@ -68,6 +66,7 @@ cookbooks.each {
 
     job("chef/" + testKitchenJobName){
         description("This job was created with automation.  Manual edits to this job are discouraged.")
+        logRotator(-1, 10, -1, 3)
         wrappers {
             colorizeOutput()
         }
@@ -98,9 +97,6 @@ cookbooks.each {
                 downstream("chef-cookbook-hygieia-dev-unbaked-1-unit-test", 'SUCCESS')
                 downstream("chef-cookbook-hygieia-petclinic-demo-unbaked-1-unit-test", 'SUCCESS')
             }
-            publishBuild {
-                discardOldBuilds(-1, 15)
-            }
             slackNotifier {
                 notifyFailure(true)
                 notifySuccess(true)
@@ -128,6 +124,7 @@ cookbooks.each {
     job("chef/" + knifeUploadJobName){
         //disabled()
         description("This job was created with automation.  Manual edits to this job are discouraged.")
+        logRotator(-1, 10, -1, 3)
         wrappers {
             colorizeOutput()
             credentialsBinding {
@@ -183,9 +180,6 @@ knife spork upload ${cookBookName}
 #knife spork promote sandbox ${cookBookName} --remote""")
         }
         publishers {
-            publishBuild {
-                discardOldBuilds(-1, 15)
-            }
             slackNotifier {
                 notifyFailure(true)
                 notifySuccess(true)
